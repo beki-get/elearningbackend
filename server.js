@@ -19,6 +19,11 @@ app.use("/api/enrollments", enrollmentRoutes);
 app.use("/api/lessons", lessonRoutes);
 app.use("/api/payments", paymentRoutes);
 
+
+app.get("/test-stripe", (req, res) => {
+  res.json({ stripeLoaded: !!process.env.STRIPE_SECRET_KEY });
+});
+
 // Health check
 
 app.get("/", (req, res) => {
