@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+ 
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               Int              @id @default(autoincrement())
+  name             String
+  email            String           @unique
+  password         String
+  role             String
+  courses          Course[]
+  enrollments      Enrollment[]
+  lessonProgresses LessonProgress[]
+}
+
+model Course {
+  id           Int          @id @default(autoincrement())
+  title        String
+  description  String
+  category     String
+  price        Float
+  instructor   User         @relation(fields: [instructorId], references: [id])
+  instructorId Int
+  enrollments  Enrollment[]
+  lessons      Lesson[]
+}
+
+model Enrollment {
+  id        Int      @id @default(autoincrement())
+  student   User     @relation(fields: [studentId], references: [id])
+  studentId Int
+  course    Course   @relation(fields: [courseId], references: [id])
+  courseId  Int
+  createdAt DateTime @default(now())
+}
+
+model Lesson {
+  id             String           @id @default(uuid())
+  title          String
+  videoUrl       String
+  courseId       Int
+  course         Course           @relation(fields: [courseId], references: [id])
+  createdAt      DateTime         @default(now())
+  LessonProgress LessonProgress[]
+}
+
+model LessonProgress {
+  id        Int     @id @default(autoincrement())
+  student   User    @relation(fields: [studentId], references: [id])
+  studentId Int
+  lesson    Lesson  @relation(fields: [lessonId], references: [id])
+  lessonId  String
+  completed Boolean @default(false)
+}
