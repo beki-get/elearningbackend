@@ -33,10 +33,10 @@ const getInstructorCourses = async (req, res) => {
 };
 // Create a course
 const createCourse = async (req, res) => {
-  const { title, description, category, price, instructorId, image } = req.body;
+  const { title, description, category, price, instructorId, imageUrl } = req.body;
   try {
     const course = await prisma.course.create({
-      data: { title, description, category, price, instructorId, image },
+      data: { title, description, category, price, instructorId, imageUrl },
     });
     res.json(course);
   } catch (err) {
