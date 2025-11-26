@@ -14,13 +14,13 @@ The project provides RESTful APIs for all the core functionalities of a modern e
 - Admin dashboard endpoints
 
 ## Tech Stack
-- **Runtime:** Node.js
-- **Framework:** Express.js
-- **Database:** MongoDB / PostgreSQL (replace as per your choice)
-- **Authentication:** JWT, Passport.js
-- **ORM/ODM:** Mongoose / Sequelize
-- **Testing:** Jest / Mocha + Chai
-- **Environment Management:** dotenv
+- **Runtime: Node.js
+- **Framework: Express.js
+- **Database: PostgreSQL 
+- **Authentication:JWT
+- **ORM/ODM:Prisma ORM
+- **Testing: Jest
+- **Environment Management:dotenv
 
 ## Installation
 1. Clone the repository:
